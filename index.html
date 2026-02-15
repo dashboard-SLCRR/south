@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEEP DIVE MEETING PROGRESS UPDATE - EAST</title>
+    <title>WEST REGION PROGRESS UPDATE</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -39,6 +39,7 @@
                 <div class="flex items-center gap-2 mb-4">
                     <!-- Added ID for dynamic date update -->
                     <span id="last-updated-date" class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Updated Dec 2025</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#006EB5] text-white">WEST REGION</span>
                 </div>
                 
                 <!-- Project Title (Regular Font) -->
@@ -48,7 +49,7 @@
 
                 <!-- Dashboard Title (Bold/Large Font) -->
                 <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-                    <span class="text-[#006EB5]">East Region Activities Dashboard</span><br>
+                    <span class="text-[#006EB5]">West Region Activities Dashboard</span><br>
                     Deep Dive Meeting
                 </h1>
             </div>
@@ -57,14 +58,13 @@
             
         </header>
 
-        <!-- Key Metrics Title -->
-        <h2 class="text-xl font-semibold text-white flex items-center gap-2 mb-6">
-            <div class="w-1.5 h-6 bg-[#006EB5] rounded-full"></div>
-            <span>Activities Overview</span>
+        <!-- Key Metrics Title (Updated Style) -->
+        <h2 class="text-xl font-bold text-white mb-6 border-l-4 border-[#006EB5] pl-4">
+            Activities Overview
         </h2>
 
-        <!-- Key Metrics Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12" id="stats-grid">
+        <!-- Key Metrics Grid (Updated to 3 columns to match image) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" id="stats-grid">
             <!-- Stats injected by JS -->
         </div>
 
@@ -77,7 +77,8 @@
                 <h3 class="text-slate-200 font-semibold mb-6 flex items-center gap-2 w-full">
                     <i data-lucide="pie-chart" class="w-4 h-4 text-[#41B6E6]"></i> Status Distribution
                 </h3>
-                <div class="flex items-center justify-between w-full px-4" id="status-chart-container">
+                <!-- Updated: Changed justify-between to justify-center and added gap-8 for better spacing -->
+                <div class="flex items-center justify-center gap-8 w-full px-2" id="status-chart-container">
                     <!-- Donut Chart -->
                 </div>
             </div>
@@ -111,8 +112,8 @@
                     <button onclick="setFilter('all')" id="btn-all" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20">
                         All Projects
                     </button>
-                    <button onclick="setFilter('delayed')" id="btn-delayed" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
-                        Delayed / Attention
+                    <button onclick="setFilter('attention')" id="btn-attention" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
+                        Attention / Notes
                     </button>
                 </div>
             </div>
@@ -136,113 +137,68 @@
 
     <!-- Application Logic -->
     <script>
-        // --- Data ---
-        // Populated with correct East Region Projects from PDF
+        // --- Data Extracted from West Region PDF Source ---
         const projects = [
             {
                 id: 1, 
-                region: "East", 
-                donor: "France", 
-                activity: "Weather Station Equipment",
-                percentage: 100, 
-                progressDesc: "Transport of equipment to target locations under preparation", 
-                comments: "Discussion on installation still ongoing with LNMC",
-                icon: "cloud-rain",
-                link: "https://drive.google.com/drive/folders/1AevU9U_AfhpfpZvNza55fMDvRU_pn879?usp=sharing",
-                value: "74,957.70"
+                region: "West", 
+                donor: "Italy", 
+                activity: "Completion of the auditorium in Qaser Ben Gashir Municipality",
+                percentage: 0, 
+                progressDesc: "(in handover process)", 
+                comments: "RACP finalized and approved. (in handover process)",
+                icon: "mic-2",
+                // Extracted value for consistency since code supports it now
+                value: "USD 516,000"
             },
             {
                 id: 2, 
-                region: "East", 
-                donor: "EU", 
-                activity: "Silphium Square Rehabilitation Project",
-                percentage: 100, 
-                progressDesc: "Completed", 
-                status: "Finalized",
-                comments: "Completion date 15 Dec 2025. On schedule.",
-                icon: "map",
-                value: "134,255",
-                link: "https://drive.google.com/drive/folders/1ckIfJ9ss_wMHsolRxYXsRU-Hq3xktizK?usp=sharing"
+                region: "West", 
+                donor: "Italy", 
+                activity: "Rehabilitation of the Historical Omar Ben Abdulaziz School in Gaser Bin Gashir Municipality",
+                percentage: 0, 
+                progressDesc: "Evaluation of bids ongoing", 
+                comments: "Evaluation of bids ongoing",
+                icon: "school"
             },
             {
                 id: 3, 
-                region: "East", 
-                donor: "EU", 
-                activity: "Engineering Consultancy: Al-Rabih Market Reconstruction",
-                percentage: 100, 
-                progressDesc: "under final handover Process", 
-                comments: "Completion date 21st Jan 2026.",
-                icon: "store",
-                value: "124,400",
-                link: "https://drive.google.com/drive/folders/13P1Z8Jg6WFpY-2ua5qHdl0H3DCamcCXO?usp=sharing"
-            },
-            {
-                id: 4, 
-                region: "East", 
-                donor: "Libya", 
-                activity: "Benghazi Municipal Building Rehabilitation",
-                percentage: 60, 
-                progressDesc: "Ongoing", 
-                comments: "Completion date 30th June 2026.",
-                icon: "building-2",
-                value: "2,150,000"
-            },
-            {
-                id: 5, 
-                region: "East", 
-                donor: "Libya", 
-                activity: "Rehabilitation of Historical Building Al Manar Palace",
-                percentage: 100, 
-                progressDesc: "Pending Retention", 
-                status: "Finalized", // Marking finalized based on 100% work
-                comments: "Work completed 30 March 2025. Currently in retention period.",
-                icon: "landmark",
-                value: "2,189,438",
-                link: "https://drive.google.com/drive/folders/1jFwiEv5-bzKpuf0B29cCpgkDWLfAxU46?usp=sharing"
+                region: "West", 
+                donor: "Italy", 
+                activity: "Furnishing of Omar Ben Abdulaziz School",
+                percentage: 0, 
+                progressDesc: "Not initiated<br>(pending award from Omar Ben Abdulaziz School)", 
+                comments: "Usage of the building has been confirmed as Community Space.<br>Initiation pending contract award and 30% site work progress (to avoid business incubator furniture case).",
+                icon: "armchair"
             },
             {
                 id: 6, 
-                region: "East", 
-                donor: "France", 
-                activity: "Rehabilitation of five water pump stations (Bayda)",
+                region: "West", 
+                donor: "Italy", 
+                activity: "Tawergha Peacebuilding Local Peacebuilding & Development Plan",
                 percentage: 100, 
-                progressDesc: "Under final handover process", 
-                comments: "Completion date 26th Dec 2025.",
-                icon: "droplets",
-                value: "294,895",
-                link: "https://drive.google.com/drive/folders/1CcEBGQumO-6r1jnHFPUd8U6Oj5ZBeoOe?usp=sharing"
+                progressDesc: "(The official launch at MOLG was formally conducted on 1 February.)", 
+                comments: "(The plan was officially handed over)",
+                link: "https://drive.google.com/file/d/1ClvUK0LXINYFZFOKf-voTLmO79QY9Uby/view?usp=sharing",
+                icon: "file-check-2"
             },
             {
                 id: 7, 
-                region: "East", 
-                donor: "AfDB", 
-                activity: "TOT Training: Municipal Business Incubators (DERAYA)",
+                region: "West", 
+                donor: "Italy", 
+                activity: "Supply of Electrical Material for Tawergha Municipality, Libya",
                 percentage: 100, 
-                progressDesc: "Finalized", 
-                status: "Finalized", 
-                comments: "Benghazi completed 4/11/2025, Derna completed 12/11/2025.",
-                icon: "graduation-cap",
-                link: "https://www.facebook.com/story.php?story_fbid=760487450380587&id=100092580150883&mibextid=wwXIfr&rdid=Hq4VhKRL8JBxmKqH",
-                value: "15,000"
-            },
-            {
-                id: 8, 
-                region: "East", 
-                donor: "AfDB", 
-                activity: "Small Grants to Startups in Benghazi and Derna",
-                percentage: 55, 
-                progressDesc: "Ongoing", 
-                comments: "Completion date 30 May 2026.",
-                icon: "coins",
-                value: "190,456.240"
+                progressDesc: "Contract Awarded on 9 December", 
+                comments: "",
+                link: "https://drive.google.com/drive/folders/1faNnrq_V2SmOp3b4MUoS9id7QUaZv0qY?usp=sharing",
+                icon: "zap",
+                value: "USD 137,339"
             }
         ];
 
         // --- Helpers ---
-        function createDonutChart(data, size = 160, thickness = 12, overrideValue = null, label = "Total") {
+        function createDonutChart(data, size = 160, thickness = 12) {
             const total = data.reduce((acc, item) => acc + item.value, 0);
-            const displayValue = overrideValue !== null ? overrideValue : total;
-            
             const radius = (size - thickness) / 2;
             const circumference = 2 * Math.PI * radius;
             let currentOffset = 0;
@@ -261,8 +217,8 @@
                         ${svgContent}
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span class="text-3xl font-bold text-white">${displayValue}</span>
-                        <span class="text-[10px] uppercase tracking-widest text-[#41B6E6]">${label}</span>
+                        <span class="text-3xl font-bold text-white">${total}</span>
+                        <span class="text-[10px] uppercase tracking-widest text-[#41B6E6]">Total</span>
                     </div>
                 </div>
             `;
@@ -272,38 +228,67 @@
             const commentsLower = project.comments?.toLowerCase() || "";
             const progressLower = project.progressDesc?.toLowerCase() || "";
             
-            const isDelayed = commentsLower.includes('delay') || commentsLower.includes('stalled') || commentsLower.includes('awaiting') || progressLower.includes('stalled');
-            const isActionRequired = commentsLower.includes("action required") || commentsLower.includes("follow up");
+            // Logic for visual indicators
+            const isAttention = commentsLower.includes('@') || commentsLower.includes('discussion') || commentsLower.includes('submit');
+            const isImportantCost = commentsLower.includes('$') || commentsLower.includes('cost');
+            // New logic for positive updates
+            const isPositive = commentsLower.includes('handed over') || commentsLower.includes('official launch');
             
+            // Updated Logic: 
+            // "Evaluation Finalized" should show as Pending, not Completed/Finalizing.
+            const isCompleted = (progressLower.includes('finalized') && !progressLower.includes('evaluation')) || project.percentage >= 90;
+            const isNotInitiated = progressLower.includes('not initiated') || progressLower.includes('evaluation finalized');
+
             // Status Badge
             let statusBadge = '';
-            if (project.status === 'Finalized' || project.percentage === 100) {
+            if (isCompleted) {
                  statusBadge = `<span class="flex items-center gap-1 text-emerald-400 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20"><i data-lucide="check-circle-2" class="w-3 h-3"></i> Finalized</span>`;
-            } else if (project.status === 'Stalled') {
-                 statusBadge = `<span class="flex items-center gap-1 text-rose-400 text-xs font-bold bg-rose-500/10 px-2 py-1 rounded-full border border-rose-500/20"><i data-lucide="x-circle" class="w-3 h-3"></i> Stalled</span>`;
+            } else if (isNotInitiated) {
+                 statusBadge = `<span class="flex items-center gap-1 text-slate-400 text-xs font-bold bg-slate-500/10 px-2 py-1 rounded-full border border-slate-500/20"><i data-lucide="pause-circle" class="w-3 h-3"></i> Pending</span>`;
             } else {
-                 statusBadge = `<span class="flex items-center gap-1 text-[#41B6E6] text-xs font-bold bg-[#006EB5]/10 px-2 py-1 rounded-full border border-[#006EB5]/20"><i data-lucide="clock" class="w-3 h-3"></i> Active</span>`;
+                 statusBadge = `<span class="flex items-center gap-1 text-amber-400 text-xs font-bold bg-amber-500/10 px-2 py-1 rounded-full border border-amber-500/20"><i data-lucide="loader-2" class="w-3 h-3"></i> In Progress</span>`;
             }
 
             // Footer Logic
             let footerContent = '';
-            if (isActionRequired) {
+            
+            // Check for @ mentions first (Action Required)
+            if (project.comments.includes("@")) {
                 footerContent = `
                     <div class="flex items-start gap-2 text-xs text-rose-300 bg-rose-900/10 p-2 rounded border border-rose-500/20">
-                        <i data-lucide="alert-circle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
-                        <span class="font-semibold">${project.comments}</span>
+                        <i data-lucide="at-sign" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
+                        <span class="font-semibold">Action Required: ${project.comments}</span>
                     </div>`;
-            } else if (isDelayed) {
+            } 
+            // Check for Financials
+            else if (isImportantCost) {
                 footerContent = `
-                    <div class="flex items-start gap-2 text-xs text-amber-300 bg-amber-900/10 p-2 rounded border border-amber-500/20">
-                        <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
+                    <div class="flex items-start gap-2 text-xs text-emerald-300 bg-emerald-900/10 p-2 rounded border border-emerald-500/20">
+                        <i data-lucide="dollar-sign" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
                         <span>${project.comments}</span>
                     </div>`;
-            } else {
+            }
+            // Check for Positive Updates (Blue)
+            else if (isPositive) {
+                footerContent = `
+                    <div class="flex items-start gap-2 text-xs text-[#41B6E6] bg-[#006EB5]/10 p-2 rounded border border-[#006EB5]/20">
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
+                        <span class="font-semibold">${project.comments}</span>
+                    </div>`;
+            }
+            // Check for Discussions/Notes (Default Attention/Amber)
+            else if (project.comments.length > 0) {
+                 footerContent = `
+                    <div class="flex items-start gap-2 text-xs text-amber-300 bg-amber-900/10 p-2 rounded border border-amber-500/20">
+                        <i data-lucide="info" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
+                        <span>${project.comments}</span>
+                    </div>`;
+            }
+             else {
                 footerContent = `
                     <div class="flex items-start gap-2 text-xs text-slate-400">
                         <i data-lucide="message-square" class="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#006EB5]"></i>
-                        <span>${project.comments || "No comments."}</span>
+                        <span>No additional remarks.</span>
                     </div>`;
             }
             
@@ -311,77 +296,57 @@
             let linkContent = '';
             if (project.link) {
                 linkContent = `
-                    <a href="${project.link}" target="_blank" class="mt-3 flex items-center gap-1.5 text-xs font-bold text-[#41B6E6] hover:text-white transition-colors group/link w-fit">
+                    <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="mt-3 flex items-center gap-1.5 text-xs font-bold text-[#41B6E6] hover:text-white transition-colors group/link w-fit">
                         View Resource <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"></i>
                     </a>
                 `;
             }
 
-            // Value Logic (Aligned & Single Line)
-            let valueContent = '';
+            // Value Logic (Budget Display)
+            let customContent = '';
             let valueText = project.value;
-            // Add USD prefix if missing and it looks like a number
-            if (valueText && !valueText.toString().includes('USD')) {
-                 valueText = 'USD ' + valueText;
-            }
-
+            
             if (valueText) {
-                 valueContent = `
-                    <div class="mb-4 relative bg-[#001a33] border border-[#003366] rounded-xl px-4 py-3 overflow-hidden group-hover:border-[#006EB5]/50 transition-colors flex items-center gap-3">
-                        <div class="p-1.5 rounded-lg bg-[#006EB5]/20 text-[#41B6E6] border border-[#006EB5]/30 shrink-0">
-                            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
-                        </div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Value:</span>
-                            <span class="text-lg font-bold text-white tracking-tight">${valueText}</span>
+                customContent = `
+                    <div class="mb-4 relative bg-[#001a33] border border-[#003366] rounded-xl p-4 overflow-hidden group-hover:border-[#006EB5]/50 transition-colors">
+                        <div class="relative z-10 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-1">Value</p>
+                                <div class="text-2xl font-bold text-white tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#41B6E6]">
+                                    ${valueText}
+                                </div>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-[#006EB5]/20 flex items-center justify-center text-[#41B6E6] border border-[#006EB5]/30">
+                                <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                            </div>
                         </div>
                     </div>
-                 `;
+                `;
             }
 
             // Progress Bar Logic
             let barColorClass = 'from-[#006EB5] to-[#41B6E6]';
             let textColorClass = 'text-[#41B6E6]';
-            let percentageDisplay = project.percentage !== null ? `${project.percentage}%` : 'N/A';
-            let barWidth = project.percentage !== null ? project.percentage : 0;
             
-            if (project.percentage === 100) {
+            if (project.percentage >= 90) {
                 barColorClass = 'from-emerald-500 to-emerald-300';
                 textColorClass = 'text-emerald-400';
-            } else if (project.status === 'Stalled') {
-                barColorClass = 'from-rose-500 to-rose-700';
-                textColorClass = 'text-rose-400';
+            } else if (isNotInitiated) {
+                barColorClass = 'from-slate-600 to-slate-500';
+                textColorClass = 'text-slate-400';
             }
-            
-            let progressSection = '';
-            if (project.percentage === null) {
-                // If no percentage is known/applicable
-                progressSection = `
-                 <div>
+
+            let progressSection = `
+                <div>
                     <div class="flex justify-between text-xs mb-1.5">
-                        <span class="text-slate-400 font-medium">Status</span>
-                        <span class="${textColorClass} font-bold">${project.progressDesc}</span>
+                        <span class="text-slate-400 font-medium">Completion</span>
+                        <span class="${textColorClass} font-bold">${project.percentage}%</span>
                     </div>
                     <div class="h-2 w-full bg-[#001a33] rounded-full overflow-hidden border border-[#003366]/50">
-                        <div class="h-full w-full bg-slate-700/30 rounded-full flex items-center justify-center">
-                           <div class="w-1/3 h-full bg-slate-600/50 animate-pulse rounded-full"></div>
-                        </div>
+                        <div class="h-full bg-gradient-to-r ${barColorClass} rounded-full" style="width: ${project.percentage}%"></div>
                     </div>
-                 </div>
-                `;
-            } else {
-                progressSection = `
-                    <div>
-                        <div class="flex justify-between text-xs mb-1.5">
-                            <span class="text-slate-400 font-medium">Completion</span>
-                            <span class="${textColorClass} font-bold">${percentageDisplay}</span>
-                        </div>
-                        <div class="h-2 w-full bg-[#001a33] rounded-full overflow-hidden border border-[#003366]/50">
-                            <div class="h-full bg-gradient-to-r ${barColorClass} rounded-full" style="width: ${barWidth}%"></div>
-                        </div>
-                        ${project.percentage < 100 ? `<p class="text-[10px] text-slate-500 mt-2">${project.progressDesc}</p>` : ''}
-                    </div>`;
-            }
+                    <p class="text-[10px] text-slate-500 mt-2 uppercase tracking-wider">${project.progressDesc}</p>
+                </div>`;
 
             return `
                 <div class="group relative overflow-hidden rounded-2xl bg-[#002347]/60 p-6 border border-[#006EB5]/30 backdrop-blur-xl shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[#006EB5]/20 hover:border-[#006EB5]/80">
@@ -395,8 +360,7 @@
                                 </div>
                                 ${statusBadge}
                             </div>
-                            <!-- Added min-h to align content across cards -->
-                            <div class="flex items-start gap-3 mb-2 min-h-[3.5rem]">
+                            <div class="flex items-start gap-3 mb-2">
                                 <div class="p-2 rounded-lg bg-[#001a33] text-[#006EB5] border border-[#003366] shrink-0 mt-1">
                                     <i data-lucide="${project.icon}" class="w-5 h-5"></i>
                                 </div>
@@ -404,7 +368,7 @@
                             </div>
                         </div>
                         <div class="mt-6 space-y-4">
-                            ${valueContent}
+                            ${customContent}
                             ${progressSection}
                             <div class="pt-4 border-t border-[#003366] min-h-[60px]">
                                 ${footerContent}
@@ -416,17 +380,17 @@
             `;
         }
 
-        function createStatCard(title, value, subtext, icon, trend) {
-            const trendClass = trend === 'up' ? 'from-[#006EB5]/20 to-[#41B6E6]/20 text-[#41B6E6]' : 'from-[#001a33] to-[#002347] text-slate-400';
+        // Updated Function: createStatCard to match image style
+        function createStatCard(title, value, subtext, icon) {
             return `
-                <div class="bg-[#002347]/40 border border-[#006EB5]/20 p-5 rounded-2xl backdrop-blur-md flex items-center justify-between shadow-lg">
+                <div class="bg-[#001226] border border-[#1e293b] p-6 rounded-2xl flex items-center justify-between shadow-lg">
                     <div>
-                        <p class="text-slate-400 text-sm font-medium mb-1">${title}</p>
-                        <h4 class="text-2xl font-bold text-white">${value}</h4>
-                        <p class="text-xs text-[#41B6E6]/80 mt-1">${subtext}</p>
+                        <p class="text-slate-400 text-sm font-medium">${title}</p>
+                        <h4 class="text-4xl font-bold text-white mt-2 tracking-tight">${value}</h4>
+                        <p class="text-xs text-[#41B6E6] mt-2 font-medium">${subtext}</p>
                     </div>
-                    <div class="p-3 rounded-xl bg-gradient-to-br ${trendClass}">
-                        <i data-lucide="${icon}" class="w-6 h-6"></i>
+                    <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b]">
+                        <i data-lucide="${icon}" class="w-6 h-6 text-slate-400"></i>
                     </div>
                 </div>
             `;
@@ -437,33 +401,36 @@
 
         function renderStats() {
             const total = projects.length;
-            const finalized = projects.filter(p => p.percentage === 100 || p.status === 'Finalized').length;
+            const notInitiated = projects.filter(p => p.progressDesc.toLowerCase().includes('not initiated')).length;
+            const finalized = projects.filter(p => p.percentage >= 100).length; // 100% complete
             
-            // Calculate Average Progress
-            // Filter out projects with null percentage to avoid NaN, though all currently have values
-            const activeProjectsWithProgress = projects.filter(p => p.percentage !== null);
-            const totalProgress = activeProjectsWithProgress.reduce((acc, curr) => acc + curr.percentage, 0);
-            const averageProgress = activeProjectsWithProgress.length > 0 
-                ? Math.round(totalProgress / activeProjectsWithProgress.length) 
-                : 0;
+            // "Active" = Total minus (Not Initiated + Finalized)
+            // In this specific dataset, ID 6 is 90%, so it's still considered "Active/Working on".
+            const active = total - notInitiated - finalized;
+            
+            // Calculate Average Progress across all projects
+            const totalPercentage = projects.reduce((sum, project) => sum + (project.percentage || 0), 0);
+            const averageProgress = total > 0 ? Math.round(totalPercentage / total) : 0;
 
             const grid = document.getElementById('stats-grid');
+            // Updated Active Activities card to reflect "Working on" status
             grid.innerHTML = `
-                ${createStatCard("Total Activities", total, "East Region", "layout-grid", "neutral")}
-                ${createStatCard("Average Completion", `${averageProgress}%`, `Across ${total} Activities`, "trending-up", "up")}
-                ${createStatCard("Ongoing Activities", total - finalized, "In Progress", "clock", "neutral")}
+                ${createStatCard("Total Activities", total, "West Region", "layout-grid")}
+                ${createStatCard("Progress Percentage", `${averageProgress}%`, "Average across all activities", "trending-up")}
+                ${createStatCard("Ongoing Activities", active, "Work in progress", "clock")}
             `;
         }
 
         function renderCharts() {
-            // Status Data: Breakdown into Ongoing, Finalized
-            const finalized = projects.filter(p => p.status === 'Finalized' || p.percentage === 100).length;
-            // Removed Stalled logic as requested
-            const ongoing = projects.length - finalized;
+            // Status Data
+            const notInitiated = projects.filter(p => p.progressDesc.toLowerCase().includes('not initiated')).length;
+            const finalized = projects.filter(p => p.percentage >= 90).length;
+            const ongoing = projects.length - notInitiated - finalized;
 
             const statusData = [
-                { value: ongoing, color: '#41B6E6' },   // Light Blue
-                { value: finalized, color: '#006EB5' }  // Dark Blue
+                { value: ongoing, color: '#41B6E6' },   // Light Blue (Ongoing)
+                { value: finalized, color: '#006EB5' }, // Dark Blue (Finalized)
+                { value: notInitiated, color: '#334155' } // Slate (Pending)
             ];
             
             // Render Status Chart & Legend
@@ -471,8 +438,9 @@
             statusContainer.innerHTML = `
                 ${createDonutChart(statusData)}
                 <div class="space-y-3">
-                    <div class="flex items-center gap-3 text-sm"><div class="w-3 h-3 rounded-full bg-[#41B6E6]"></div><span class="text-slate-400">Ongoing</span><span class="text-white font-bold">${ongoing}</span></div>
-                    <div class="flex items-center gap-3 text-sm"><div class="w-3 h-3 rounded-full bg-[#006EB5]"></div><span class="text-slate-400">Finalized</span><span class="text-white font-bold">${finalized}</span></div>
+                    <div class="flex items-center gap-3 text-sm"><div class="w-3 h-3 rounded-full bg-[#41B6E6]"></div><span class="text-slate-400">Ongoing/Eval</span><span class="text-white font-bold">${ongoing}</span></div>
+                    <div class="flex items-center gap-3 text-sm"><div class="w-3 h-3 rounded-full bg-[#006EB5]"></div><span class="text-slate-400">Near Finish</span><span class="text-white font-bold">${finalized}</span></div>
+                    <div class="flex items-center gap-3 text-sm"><div class="w-3 h-3 rounded-full bg-[#334155]"></div><span class="text-slate-400">Pending</span><span class="text-white font-bold">${notInitiated}</span></div>
                 </div>
             `;
 
@@ -483,15 +451,15 @@
                 donors[name] = (donors[name] || 0) + 1;
             });
 
-            const colors = ['#006EB5', '#41B6E6', '#008CBA', '#6699CC', '#89CFF0', '#004d80'];
+            const colors = ['#006EB5', '#41B6E6', '#008CBA', '#6699CC'];
             const donorData = Object.keys(donors).map((name, index) => ({
                 name: name,
                 value: donors[name],
                 color: colors[index % colors.length]
             })).sort((a, b) => b.value - a.value);
 
-            // Render Donor Chart - Updated to show unique donor count (4)
-            document.getElementById('donor-chart-container').innerHTML = createDonutChart(donorData, 180, 16, donorData.length, "Donors");
+            // Render Donor Chart
+            document.getElementById('donor-chart-container').innerHTML = createDonutChart(donorData, 180, 16);
 
             // Render Donor Legend
             document.getElementById('donor-legend').innerHTML = donorData.map(d => `
@@ -513,19 +481,17 @@
             const title = document.getElementById('projects-title');
             
             let filtered = projects;
-            if (currentFilter === 'delayed') {
+            if (currentFilter === 'attention') {
                 filtered = projects.filter(p => {
                     const commentsLower = p.comments?.toLowerCase() || "";
                     const progressLower = p.progressDesc?.toLowerCase() || "";
-                    return commentsLower.includes('delay') || 
-                           commentsLower.includes('challenge') || 
-                           commentsLower.includes('awaiting') ||
-                           commentsLower.includes('stalled') ||
-                           progressLower.includes('stalled') ||
-                           commentsLower.includes("action required") ||
-                           commentsLower.includes("follow up");
+                    // Filter for mentions, costs, or stalled items
+                    return commentsLower.includes('@') || 
+                           commentsLower.includes('$') || 
+                           commentsLower.includes('delay') || 
+                           commentsLower.includes('discussion');
                 });
-                title.innerText = 'Activities Cards (Attention Required)';
+                title.innerText = 'Activities Cards (Attention/Notes)';
             } else {
                 title.innerText = 'Activities Cards';
             }
@@ -548,21 +514,22 @@
             
             // Update UI buttons
             const btnAll = document.getElementById('btn-all');
-            const btnDelayed = document.getElementById('btn-delayed');
+            const btnAttention = document.getElementById('btn-attention');
             const activeClass = "bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20";
             const inactiveClass = "bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]";
 
             if (type === 'all') {
                 btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
-                btnDelayed.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+                btnAttention.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
             } else {
                 btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
-                btnDelayed.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
+                btnAttention.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
             }
 
             renderProjects();
         }
 
+        // --- Date Update Function ---
         function updateDate() {
             const dateElement = document.getElementById('last-updated-date');
             if (dateElement) {
@@ -575,7 +542,7 @@
 
         // --- Init ---
         window.onload = () => {
-            updateDate();
+            updateDate(); // Call date update
             renderStats();
             renderCharts();
             renderProjects();
