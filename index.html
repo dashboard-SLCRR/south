@@ -167,9 +167,10 @@
             },
             {
                 id: 5, region: "South", donor: "FW", activity: "Procurement of GIS workstation for Sebha Municipality including Data-Collection Tablets",
-                percentage: 70, progressDesc: "Contracted", comments: "delivery is planned for 18 March 2026, (this includes the 1-week buffer).",
+                percentage: 70, progressDesc: "Contracted", comments: "(Waiting some updates from the contractor) delivery is planned for 18 March 2026, (this includes the 1-week buffer).",
                 icon: "monitor",
-                value: "USD 83,366"
+                value: "USD 83,366",
+                actionItem: true
             },
             {
                 id: 6, region: "South", donor: "FW", activity: "Training & mentorship program on journalism ethics, and mobile content production in Sebha",
@@ -180,19 +181,19 @@
             },
             {
                 id: 7, region: "South", donor: "FW / Norway", activity: "Peacebuilding & Local Development Plans – Implementation Progress Tracking Application",
-                percentage: 65, progressDesc: "Completion Date: before end of March", comments: "working on the Tracking Application",
+                percentage: 90, progressDesc: "Completion Date: before end of March", comments: "working on the Tracking Application (The application is currently in the testing phase.)",
                 icon: "smartphone",
                 value: "USD 22,000"
             },
             {
                 id: 8, region: "South", donor: "FW", activity: "(Small Grants to Local Women’s Organizations)",
-                percentage: 10, progressDesc: "Activity kick-off meeting – 15 February 2026", comments: "(Call for Proposals announced)",
+                percentage: 25, progressDesc: "Activity kick-off meeting – 15 February 2026", comments: "The CSOs have been selected, and the training will take place in mid-April. (Completion Date: end of May 2026)",
                 icon: "heart-handshake",
                 value: "USD 75,000"
             },
             {
                 id: 9, region: "South", donor: "Norway", activity: "Construction of Football Pitch in Bent Baya",
-                percentage: 90, progressDesc: "Contracted - Handover site on 10th Nov", comments: "(Completion Date: 28 February 2026)",
+                percentage: 92, progressDesc: "Contracted - Handover site on 10th Nov", comments: "(Completion Date: 28 February 2026)",
                 icon: "trophy",
                 value: "USD 73,819",
                 link: "https://drive.google.com/drive/folders/1EGtudcRWjh-Bv7CECnTeHet13csRXDBV?usp=drive_link"
@@ -206,7 +207,7 @@
             },
             {
                 id: 11, region: "South", donor: "Norway", activity: "Provision of Engineering Services for the Rehabilitation of Water Well in Muzque (Sharguiya)",
-                percentage: 35, progressDesc: "extended to 18 April-2026", comments: "Tentative site handover to the contractor on 21 December 2025. The water well drilling rig has arrived at the site; however, due to a fuel shortage in the Muzque (Sharguiya), the contractor has formally requested NCE.",
+                percentage: 55, progressDesc: "extended to 18 April-2026", comments: "Tentative site handover to the contractor on 21 December 2025. The water well drilling rig has arrived at the site; however, due to a fuel shortage in the Muzque (Sharguiya), the contractor has formally requested NCE.",
                 icon: "droplets",
                 value: "USD 55,000",
                 link: "https://drive.google.com/drive/folders/1K_C4pbe4pwAl-7y1DK_EiadwCaXcD0JU?usp=sharing"
@@ -244,7 +245,7 @@
             },
             {
                 id: 17, region: "South", donor: "FW", activity: "Consultancy on the Design and Implementation of Referral Procedures for the Women Support and Empowerment Affairs Offices (WSEAOs) in Sebha and Murzuq",
-                percentage: 0, progressDesc: "Approximate completion date: Monday, 11 May 2026. (55 Working Days over a 3-months period)", comments: "(The contract has been signed with the consultant.)",
+                percentage: 15, progressDesc: "Approximate completion date: Monday, 11 May 2026. (55 Working Days over a 3-months period)", comments: "The contract has been signed with the consultant, and the first deliverable, the inception report, has been submitted.",
                 icon: "hand-heart",
                 value: "USD 3,850"
             }
@@ -341,7 +342,7 @@
             const progressLower = project.progressDesc?.toLowerCase() || "";
             
             const isDelayed = commentsLower.includes('delay') || commentsLower.includes('stalled') || commentsLower.includes('awaiting') || progressLower.includes('stalled');
-            const isActionRequired = project.comments.includes("FOLOW UP") || project.comments.includes("IS WITH IBRAHIM");
+            const isActionRequired = project.actionItem || project.comments.includes("FOLOW UP") || project.comments.includes("IS WITH IBRAHIM");
             
             // Status Badge
             let statusBadge = '';
@@ -612,7 +613,8 @@
                 filtered = projects.filter(p => {
                     const commentsLower = p.comments?.toLowerCase() || "";
                     const progressLower = p.progressDesc?.toLowerCase() || "";
-                    return commentsLower.includes('delay') || 
+                    return p.actionItem ||
+                           commentsLower.includes('delay') || 
                            commentsLower.includes('challenge') || 
                            commentsLower.includes('awaiting') ||
                            commentsLower.includes('stalled') ||
