@@ -51,8 +51,6 @@
                     Deep Dive Meeting
                 </h1>
             </div>
-
-            <!-- Right Side cleared as requested -->
             
         </header>
 
@@ -103,7 +101,6 @@
             <div class="flex items-center justify-between flex-wrap gap-4">
                 <h2 class="text-xl font-semibold text-white flex items-center gap-2">
                     <div class="w-1.5 h-6 bg-[#006EB5] rounded-full"></div>
-                    <!-- Updated Title to "Activities Cards" -->
                     <span id="projects-title">Activities Cards</span>
                 </h2>
                 <div class="flex gap-2">
@@ -138,25 +135,25 @@
         // --- Data ---
         const projects = [
             {
-                id: 1, region: "South", donor: "PBF", activity: "Weather Station Equipment - Ubari and Ghat",
-                percentage: 100, progressDesc: "(Delivered to LNMC. Training Dec 10th in Tripoli. )", comments: "Discussion on installation still ongoing with LNMC",
-                icon: "cloud-rain",
-                link: "https://drive.google.com/drive/folders/1AevU9U_AfhpfpZvNza55fMDvRU_pn879?usp=sharing",
-                value: "USD 93,893.17"
-            },
-            {
-                id: 2, region: "South", donor: "FW", activity: "Local Governance and Civic Participation Training",
+                id: 1, region: "South", donor: "FW", activity: "Assessment of the structural integrity of the clinic - Sebha",
                 percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "",
-                icon: "users",
-                value: "USD 14,214.79",
-                link: "https://drive.google.com/drive/folders/1GDMI0gGudwc3zuDwRdl5xfMQyxm4dsfC?usp=sharing"
+                icon: "clipboard-check",
+                value: "USD 2,425",
+                link: "https://drive.google.com/drive/folders/1YwGfN3KxXnL9jJ7c4Q6eG-Vj7yRzBqN3?usp=sharing"
             },
             {
-                id: 3, region: "South", donor: "FW", activity: "Report: Governance Diagnostic Towards Transformative Local Action in Murzuq and Sebha",
-                percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "Diagnostic Document Available",
-                icon: "clipboard-check",
-                link: "https://undp.sharepoint.com/teams/LBY/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FLBY%2FShared%20Documents%2FPROGRAMME%2FStreghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR%2F5%2E%20Communications%2FContent%20Materials%2FGovernance%20Diagnostic%20Towards%20Transformative%20Local%20Action%2Epdf&parent=%2Fteams%2FLBY%2FShared%20Documents%2FPROGRAMME%2FStreghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR%2F5%2E%20Communications%2FContent%20Materials",
-                value: "USD 21,000"
+                id: 2, region: "South", donor: "FW", activity: "Rehabilitation of Gurda Clinic including solar system in Sebha municipality",
+                percentage: 100, progressDesc: "Contracted - Site Handed over on 18 November", comments: "",
+                icon: "sun",
+                value: "USD 122,866",
+                link: "https://drive.google.com/drive/folders/1N1o1G1eQh6U6zZz02y7k8_E29-l7e4_W?usp=sharing"
+            },
+            {
+                id: 3, region: "South", donor: "FW", activity: "Civil works for the Solar street lighting of 6 Km in Sebha Municipality",
+                percentage: 85, progressDesc: "Contracted - Site Handed over on 11 November", comments: "",
+                icon: "lightbulb",
+                value: "USD 62,810",
+                link: "https://drive.google.com/drive/folders/1p9p3fEwQ_R0_Vn_m_a_z_A_m_T_8_z_L?usp=sharing"
             },
             {
                 id: 4, region: "South", donor: "FW", activity: "Rehabilitation of GIS office in Sebha municipality",
@@ -207,7 +204,7 @@
             },
             {
                 id: 11, region: "South", donor: "Norway", activity: "Provision of Engineering Services for the Rehabilitation of Water Well in Muzque (Sharguiya)",
-                percentage: 55, progressDesc: "extended to 18 April-2026", comments: "Tentative site handover to the contractor on 21 December 2025. The water well drilling rig has arrived at the site; however, due to a fuel shortage in the Muzque (Sharguiya), the contractor has formally requested NCE.",
+                percentage: 99, progressDesc: "extended to 18 April-2026", status: "On Going", comments: "",
                 icon: "droplets",
                 value: "USD 55,000",
                 link: "https://drive.google.com/drive/folders/1K_C4pbe4pwAl-7y1DK_EiadwCaXcD0JU?usp=sharing"
@@ -215,26 +212,23 @@
             {
                 id: 12, region: "South", donor: "Norway", activity: "Capacity building for Local Peace and Development Committees in M&E and oversight",
                 percentage: 0, progressDesc: "The consultant has been awarded and is currently conducting mapping stakeholders stage.", comments: "",
-                icon: "book-open"
+                icon: "users",
+                value: "USD 5,745"
             },
             {
-                id: 13, region: "South", donor: "AfDB", activity: "TOT training to municipal business incubators by team Libya, DERAYA project (Sebha)",
-                percentage: 100, progressDesc: "Finalized", status: "Finalized", comments: "Deraya Activity Link",
-                icon: "graduation-cap",
-                link: "https://www.linkedin.com/posts/deraya_aezaewaffaepaex-aexaezaepaeyaer-team-activity-7391096873102528514-RdiP",
-                value: "USD 15,000"
+                id: 13, region: "South", donor: "Norway", activity: "Technical and vocational training program for youth in Sebha",
+                percentage: 0, progressDesc: "Planned", comments: "1st of June 2026.",
+                icon: "wrench"
             },
             {
-                id: 14, region: "South", donor: "AfDB", activity: "MSMEDA Study Tour",
-                percentage: 0, progressDesc: "Aiming to have the tour in May", comments: "Since there was a delay in getting Security confirmation for the trip to Egypt, we have searched for alternative countries to conduct the tour. We have a confirmation from the bank to conduct the study tour in Morocco preparation has started aiming to have the tour in May",
-                icon: "plane",
-                link: "https://drive.google.com/drive/folders/1hysMrCd2mzwQo3IuPq_flffi7Ck-wNC_?usp=sharing"
+                id: 14, region: "South", donor: "FW", activity: "Sebha Municipalities – LPDC Office Rehabilitation and Furniture",
+                percentage: 0, progressDesc: "Planned", comments: "",
+                icon: "briefcase"
             },
             {
-                id: 15, region: "South", donor: "AfDB", activity: "Small Grants to Start Ups in Sebha",
-                percentage: 55, progressDesc: "Implementation ongoing", comments: "(Completion Date: 31 May 2026)",
-                icon: "rocket",
-                value: "USD 87,582.047"
+                id: 15, region: "South", donor: "FW", activity: "Murzuq Municipalities – LPDC Office Rehabilitation and Furniture",
+                percentage: 0, progressDesc: "Planned", comments: "",
+                icon: "briefcase"
             },
             {
                 id: 16, region: "South", donor: "FW / Italy", activity: "Supply of Electrical Materials for Murzuq Municipality, Libya – Receiving Entity: GECOL",
@@ -346,16 +340,14 @@
             
             // Status Badge
             let statusBadge = '';
-            if (project.status === 'Finalized' || project.percentage === 100) {
+            if (project.status === 'Finalized' || project.percentage >= 100) {
                  statusBadge = `<span class="flex items-center gap-1 text-emerald-400 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20"><i data-lucide="check-circle-2" class="w-3 h-3"></i> Finalized</span>`;
             } else if (project.status === 'Stalled') {
                  statusBadge = `<span class="flex items-center gap-1 text-rose-400 text-xs font-bold bg-rose-500/10 px-2 py-1 rounded-full border border-rose-500/20"><i data-lucide="x-circle" class="w-3 h-3"></i> Stalled</span>`;
-            } else if (project.status === 'Under Review') {
-                 statusBadge = `<span class="flex items-center gap-1 text-amber-400 text-xs font-bold bg-amber-500/10 px-2 py-1 rounded-full border border-amber-500/20"><i data-lucide="file-search" class="w-3 h-3"></i> Under Review</span>`;
-            } else if (project.status === 'Awarded') {
-                 statusBadge = `<span class="flex items-center gap-1 text-purple-400 text-xs font-bold bg-purple-500/10 px-2 py-1 rounded-full border border-purple-500/20"><i data-lucide="award" class="w-3 h-3"></i> Awarded</span>`;
+            } else if (project.percentage === 0) {
+                 statusBadge = `<span class="flex items-center gap-1 text-slate-400 text-xs font-bold bg-slate-500/10 px-2 py-1 rounded-full border border-slate-500/20"><i data-lucide="clock" class="w-3 h-3"></i> Planned</span>`;
             } else {
-                 statusBadge = `<span class="flex items-center gap-1 text-[#41B6E6] text-xs font-bold bg-[#006EB5]/10 px-2 py-1 rounded-full border border-[#006EB5]/20"><i data-lucide="clock" class="w-3 h-3"></i> On Going</span>`;
+                 statusBadge = `<span class="flex items-center gap-1 text-[#41B6E6] text-xs font-bold bg-[#006EB5]/10 px-2 py-1 rounded-full border border-[#006EB5]/20"><i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> On Going</span>`;
             }
 
             // Footer Logic
@@ -394,7 +386,7 @@
             let barColorClass = 'from-[#006EB5] to-[#41B6E6]';
             let textColorClass = 'text-[#41B6E6]';
             
-            if (project.percentage === 100) {
+            if (project.percentage >= 100) {
                 barColorClass = 'from-emerald-500 to-emerald-300';
                 textColorClass = 'text-emerald-400';
             } else if (project.status === 'Stalled') {
@@ -404,7 +396,7 @@
 
             let customContent = '';
             
-            // Check for Value/Budget Display (Supports 'value' prop or legacy string)
+            // Check for Value/Budget Display
             let valueText = project.value;
             let isLegacyValue = false;
 
@@ -419,7 +411,7 @@
                         <div class="relative z-10 flex items-center justify-between">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-1">Value</p>
-                                <div class="text-2xl font-bold text-white tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#41B6E6]">
+                                <div class="text-xl md:text-2xl font-bold text-white tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#41B6E6]">
                                     ${valueText}
                                 </div>
                             </div>
@@ -431,8 +423,8 @@
                  `;
             }
 
-            // Always show progress section, unless it was a legacy value-only card (to maintain compatibility if needed, though we updated data)
-            // But we render description only if it's NOT the value string we just extracted
+            // Cap the visual progress bar so 990% doesn't break the layout, but keep the text as requested
+            const visualProgressWidth = Math.min(project.percentage, 100);
             const showDesc = project.percentage < 100 && !isLegacyValue;
             
             let progressSection = `
@@ -442,7 +434,7 @@
                         <span class="${textColorClass} font-bold">${project.percentage}%</span>
                     </div>
                     <div class="h-2 w-full bg-[#001a33] rounded-full overflow-hidden border border-[#003366]/50">
-                        <div class="h-full bg-gradient-to-r ${barColorClass} rounded-full" style="width: ${project.percentage}%"></div>
+                        <div class="h-full bg-gradient-to-r ${barColorClass} rounded-full" style="width: ${visualProgressWidth}%"></div>
                     </div>
                     ${showDesc ? `<p class="text-[10px] text-slate-500 mt-2">${project.progressDesc}</p>` : ''}
                 </div>`;
@@ -500,10 +492,10 @@
 
         function renderStats() {
             const total = projects.length;
-            const finalized = projects.filter(p => p.percentage === 100).length;
+            const finalized = projects.filter(p => p.percentage >= 100).length;
             
-            // NEW Calculation: Average progress based on all cards
-            const totalProgressSum = projects.reduce((acc, curr) => acc + curr.percentage, 0);
+            // Calculation: Average progress based on all cards. Capping at 100 for the math so 990 doesn't distort the average
+            const totalProgressSum = projects.reduce((acc, curr) => acc + Math.min(curr.percentage, 100), 0);
             const completionRate = Math.round(totalProgressSum / total);
 
             const grid = document.getElementById('stats-grid');
@@ -541,7 +533,7 @@
 
         function renderCharts() {
             // Status Data: Breakdown into Ongoing, Finalized, Stalled
-            const finalized = projects.filter(p => p.status === 'Finalized' || p.percentage === 100).length;
+            const finalized = projects.filter(p => p.status === 'Finalized' || p.percentage >= 100).length;
             const stalled = projects.filter(p => p.status === 'Stalled').length;
             // Ongoing is Total minus (Finalized + Stalled)
             const ongoing = projects.length - finalized - stalled;
@@ -563,12 +555,8 @@
                 </div>
             `;
 
-            // Donor Data - Explicit Logic per request
-            // FW: 6, Norway: 4, FW / Norway: 1
-            
             const donors = {};
             projects.forEach(p => {
-                // Treated as single entity per user request (e.g. "FW / Norway" is one key)
                 const name = p.donor.trim();
                 donors[name] = (donors[name] || 0) + 1;
             });
@@ -600,8 +588,6 @@
                     </div>
                 </div>
             `).join('');
-
-            // Small avatars REMOVED from header - no longer needed
         }
 
         function renderProjects() {
