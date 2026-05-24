@@ -51,8 +51,6 @@
                     Deep Dive Meeting
                 </h1>
             </div>
-
-            <!-- Right Side cleared as requested -->
             
         </header>
 
@@ -193,7 +191,7 @@
             },
             {
                 id: 9, region: "South", donor: "Norway", activity: "Construction of Football Pitch in Bent Baya",
-                percentage: 92, progressDesc: "Contracted - Handover site on 10th Nov", comments: "(Completion Date: 28 February 2026)",
+                percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "(Completion Date: 28 February 2026)",
                 icon: "trophy",
                 value: "USD 73,819",
                 link: "https://drive.google.com/drive/folders/1EGtudcRWjh-Bv7CECnTeHet13csRXDBV?usp=drive_link"
@@ -207,7 +205,7 @@
             },
             {
                 id: 11, region: "South", donor: "Norway", activity: "Provision of Engineering Services for the Rehabilitation of Water Well in Muzque (Sharguiya)",
-                percentage: 99, progressDesc: "extended to 18 April-2026", comments: "Note ( All works have been completed and are awaiting final handover.)",
+                percentage: 100, progressDesc: "extended to 18 April-2026", status: "Finalized", comments: "",
                 icon: "droplets",
                 value: "USD 55,000",
                 link: "https://drive.google.com/drive/folders/1K_C4pbe4pwAl-7y1DK_EiadwCaXcD0JU?usp=sharing"
@@ -404,7 +402,7 @@
 
             let customContent = '';
             
-            // Check for Value/Budget Display (Supports 'value' prop or legacy string)
+            // Check for Value/Budget Display
             let valueText = project.value;
             let isLegacyValue = false;
 
@@ -431,8 +429,6 @@
                  `;
             }
 
-            // Always show progress section, unless it was a legacy value-only card (to maintain compatibility if needed, though we updated data)
-            // But we render description only if it's NOT the value string we just extracted
             const showDesc = project.percentage < 100 && !isLegacyValue;
             
             let progressSection = `
@@ -502,13 +498,11 @@
             const total = projects.length;
             const finalized = projects.filter(p => p.percentage === 100).length;
             
-            // NEW Calculation: Average progress based on all cards
             const totalProgressSum = projects.reduce((acc, curr) => acc + curr.percentage, 0);
             const completionRate = Math.round(totalProgressSum / total);
 
             const grid = document.getElementById('stats-grid');
             
-            // Custom Progress Card HTML
             const progressCard = `
                 <div class="bg-[#002347]/40 border border-[#006EB5]/20 p-5 rounded-2xl backdrop-blur-md shadow-lg flex flex-col justify-center">
                     <div class="flex justify-between items-start mb-3">
@@ -540,19 +534,16 @@
         }
 
         function renderCharts() {
-            // Status Data: Breakdown into Ongoing, Finalized, Stalled
             const finalized = projects.filter(p => p.status === 'Finalized' || p.percentage === 100).length;
             const stalled = projects.filter(p => p.status === 'Stalled').length;
-            // Ongoing is Total minus (Finalized + Stalled)
             const ongoing = projects.length - finalized - stalled;
 
             const statusData = [
-                { value: ongoing, color: '#41B6E6' },   // Light Blue
-                { value: finalized, color: '#006EB5' }, // Dark Blue
-                { value: stalled, color: '#f43f5e' }    // Red for Stalled
+                { value: ongoing, color: '#41B6E6' },
+                { value: finalized, color: '#006EB5' },
+                { value: stalled, color: '#f43f5e' }
             ];
             
-            // Render Status Chart & Legend
             const statusContainer = document.getElementById('status-chart-container');
             statusContainer.innerHTML = `
                 ${createDonutChart(statusData)}
@@ -563,17 +554,12 @@
                 </div>
             `;
 
-            // Donor Data - Explicit Logic per request
-            // FW: 6, Norway: 4, FW / Norway: 1
-            
             const donors = {};
             projects.forEach(p => {
-                // Treated as single entity per user request (e.g. "FW / Norway" is one key)
                 const name = p.donor.trim();
                 donors[name] = (donors[name] || 0) + 1;
             });
 
-            // Colors for the donors
             const colors = ['#006EB5', '#41B6E6', '#008CBA', '#6699CC', '#89CFF0', '#004d80'];
             
             const donorData = Object.keys(donors).map((name, index) => ({
@@ -582,12 +568,9 @@
                 color: colors[index % colors.length]
             })).sort((a, b) => b.value - a.value);
 
-            // Render Donor Chart - Pie Chart with "Donors" label and dynamic value
             const chartHTML = createPieChart(donorData, 180, "Donors", donorData.length);
-            
             document.getElementById('donor-chart-container').innerHTML = chartHTML;
 
-            // Render Donor Legend
             document.getElementById('donor-legend').innerHTML = donorData.map(d => `
                 <div class="flex items-center gap-4 group">
                     <div class="w-4 h-4 rounded-full shrink-0 shadow-[0_0_10px_rgba(0,0,0,0.3)]" style="background-color: ${d.color}"></div>
@@ -600,8 +583,6 @@
                     </div>
                 </div>
             `).join('');
-
-            // Small avatars REMOVED from header - no longer needed
         }
 
         function renderProjects() {
@@ -636,14 +617,12 @@
                 grid.innerHTML = filtered.map(p => createProjectCard(p)).join('');
             }
             
-            // Refresh icons after inserting new HTML
             lucide.createIcons();
         }
 
         function setFilter(type) {
             currentFilter = type;
             
-            // Update UI buttons
             const btnAll = document.getElementById('btn-all');
             const btnDelayed = document.getElementById('btn-delayed');
             const activeClass = "bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20";
