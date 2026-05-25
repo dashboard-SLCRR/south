@@ -104,9 +104,15 @@
                     <!-- Updated Title to "Activities Cards" -->
                     <span id="projects-title">Activities Cards</span>
                 </h2>
-                <div class="flex gap-2">
+                <div class="flex gap-2 flex-wrap">
                     <button onclick="setFilter('all')" id="btn-all" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20">
                         All Projects
+                    </button>
+                    <button onclick="setFilter('inprogress')" id="btn-inprogress" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
+                        In Progress
+                    </button>
+                    <button onclick="setFilter('completed')" id="btn-completed" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
+                        Completed 100%
                     </button>
                     <button onclick="setFilter('delayed')" id="btn-delayed" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
                         Delayed / Attention
@@ -179,19 +185,19 @@
             },
             {
                 id: 7, region: "South", donor: "FW / Norway", activity: "Peacebuilding & Local Development Plans – Implementation Progress Tracking Application",
-                percentage: 90, progressDesc: "Completion Date: before end of March", comments: "working on the Tracking Application (The application is currently in the testing phase.)",
+                percentage: 100, progressDesc: "Completion Date: before end of March", status: "Finalized", comments: "",
                 icon: "smartphone",
                 value: "USD 22,000"
             },
             {
                 id: 8, region: "South", donor: "FW", activity: "(Small Grants to Local Women’s Organizations)",
-                percentage: 45, progressDesc: "Activity kick-off meeting – 15 February 2026.", comments: "Agreement signed with selected CSOs for grants.",
+                percentage: 70, progressDesc: "Activity kick-off meeting – 15 February 2026.", comments: "(CSO STARTED IMPLEMTATION OF THE ACTIVUTIES)",
                 icon: "heart-handshake",
                 value: "USD 75,000"
             },
             {
                 id: 9, region: "South", donor: "Norway", activity: "Construction of Football Pitch in Bent Baya",
-                percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "(Completion Date: 28 February 2026)",
+                percentage: 100, progressDesc: "Contracted - Handover site on 10th Nov", status: "Finalized", comments: "(Completion Date: 28 February 2026)",
                 icon: "trophy",
                 value: "USD 73,819",
                 link: "https://drive.google.com/drive/folders/1EGtudcRWjh-Bv7CECnTeHet13csRXDBV?usp=drive_link"
@@ -224,13 +230,13 @@
             },
             {
                 id: 14, region: "South", donor: "AfDB", activity: "MSMEDA Study Tour",
-                percentage: 0, progressDesc: "Aiming to have the tour in May", comments: "Since there was a delay in getting Security confirmation for the trip to Egypt, we have searched for alternative countries to conduct the tour. We have a confirmation from the bank to conduct the study tour in Morocco preparation has started aiming to have the tour in May",
+                percentage: 0, progressDesc: "Aiming to have the tour in May", comments: "(Tunisia has now been selected as the destination for the tour, and the process is currently in the operational phase for logistics and preparations.)",
                 icon: "plane",
                 link: "https://drive.google.com/drive/folders/1hysMrCd2mzwQo3IuPq_flffi7Ck-wNC_?usp=sharing"
             },
             {
                 id: 15, region: "South", donor: "AfDB", activity: "Small Grants to Start Ups in Sebha",
-                percentage: 55, progressDesc: "Implementation ongoing", comments: "(Completion Date: 31 May 2026)",
+                percentage: 99, progressDesc: "Implementation ongoing", comments: "(Completion Date: 31 May 2026)",
                 icon: "rocket",
                 value: "USD 87,582.047"
             },
@@ -243,7 +249,7 @@
             },
             {
                 id: 17, region: "South", donor: "FW", activity: "Consultancy on the Design and Implementation of Referral Procedures for the Women Support and Empowerment Affairs Offices (WSEAOs) in Sebha and Murzuq",
-                percentage: 25, progressDesc: "Approximate completion date: Monday, 11 May 2026. (55 Working Days over a 3-months period)", comments: "The contract has been signed with the consultant, and the first deliverable, the inception report, has been submitted.",
+                percentage: 100, progressDesc: "Approximate completion date: Monday, 11 May 2026. (55 Working Days over a 3-months period)", status: "Finalized", comments: "The contract has been signed with the consultant, and the first deliverable, the inception report, has been submitted.",
                 icon: "hand-heart",
                 value: "USD 3,850"
             }
@@ -604,6 +610,12 @@
                            p.comments.includes("IS WITH IBRAHIM");
                 });
                 title.innerText = 'Activities Cards (Attention Required)';
+            } else if (currentFilter === 'inprogress') {
+                filtered = projects.filter(p => p.percentage < 100);
+                title.innerText = 'Activities Cards (In Progress)';
+            } else if (currentFilter === 'completed') {
+                filtered = projects.filter(p => p.percentage === 100);
+                title.innerText = 'Activities Cards (Completed)';
             } else {
                 title.innerText = 'Activities Cards';
             }
@@ -614,7 +626,29 @@
                         <p>No projects match this filter.</p>
                     </div>`;
             } else {
-                grid.innerHTML = filtered.map(p => createProjectCard(p)).join('');
+                let summaryHTML = '';
+                if (currentFilter === 'completed') {
+                    const totalCount = projects.length;
+                    const completedCount = projects.filter(p => p.percentage === 100).length;
+                    const percentage = Math.round((completedCount / totalCount) * 100) || 0;
+                    
+                    summaryHTML = `
+                        <div class="col-span-full mb-2 bg-[#002347]/40 border border-[#006EB5]/20 p-5 rounded-2xl backdrop-blur-md flex flex-col md:flex-row items-center gap-4 shadow-lg transition-all duration-500">
+                            <div class="text-slate-300 text-sm font-medium whitespace-nowrap flex items-center gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i>
+                                Completed Activities: <span class="text-white font-bold text-lg ml-1">${completedCount} / ${totalCount}</span>
+                            </div>
+                            <div class="w-full flex-grow h-2.5 bg-[#001a33] rounded-full overflow-hidden border border-[#003366]/50 mx-0 md:mx-4">
+                                <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" style="width: ${percentage}%"></div>
+                            </div>
+                            <div class="text-emerald-400 font-bold text-lg whitespace-nowrap">
+                                ${percentage}%
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                grid.innerHTML = summaryHTML + filtered.map(p => createProjectCard(p)).join('');
             }
             
             lucide.createIcons();
@@ -624,15 +658,27 @@
             currentFilter = type;
             
             const btnAll = document.getElementById('btn-all');
+            const btnInProgress = document.getElementById('btn-inprogress');
+            const btnCompleted = document.getElementById('btn-completed');
             const btnDelayed = document.getElementById('btn-delayed');
+            
             const activeClass = "bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20";
             const inactiveClass = "bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]";
 
+            // Reset all buttons to inactive first
+            btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+            btnInProgress.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+            btnCompleted.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+            btnDelayed.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+
+            // Set the active button
             if (type === 'all') {
                 btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
-                btnDelayed.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
-            } else {
-                btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${inactiveClass}`;
+            } else if (type === 'inprogress') {
+                btnInProgress.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
+            } else if (type === 'completed') {
+                btnCompleted.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
+            } else if (type === 'delayed') {
                 btnDelayed.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
             }
 
