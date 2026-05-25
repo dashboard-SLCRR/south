@@ -98,17 +98,17 @@
 
         <!-- Projects Section -->
         <div class="space-y-6">
-            <div class="flex items-center justify-between flex-wrap gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <h2 class="text-xl font-semibold text-white flex items-center gap-2">
                     <div class="w-1.5 h-6 bg-[#006EB5] rounded-full"></div>
-                    <!-- Updated Title to "Activities Cards" -->
                     <span id="projects-title">Activities Cards</span>
                 </h2>
-                <div class="flex gap-2 flex-wrap">
+                
+                <div class="flex gap-2 flex-wrap items-center">
                     <button onclick="setFilter('all')" id="btn-all" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#006EB5] text-white shadow-lg shadow-[#006EB5]/20">
                         All Projects
                     </button>
-                    <button onclick="setFilter('inprogress')" id="btn-inprogress" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
+                    <button onclick="setFilter('in-progress')" id="btn-inprogress" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
                         In Progress
                     </button>
                     <button onclick="setFilter('completed')" id="btn-completed" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
@@ -117,6 +117,13 @@
                     <button onclick="setFilter('delayed')" id="btn-delayed" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366]">
                         Delayed / Attention
                     </button>
+
+                    <div class="w-px h-6 bg-[#003366] mx-1"></div>
+
+                    <!-- Donor Filter Dropdown -->
+                    <select id="donor-filter" onchange="setDonorFilter(this.value)" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#002347] text-slate-400 border border-[#003366] hover:bg-[#003366] focus:outline-none cursor-pointer">
+                        <option value="all">All Donors</option>
+                    </select>
                 </div>
             </div>
 
@@ -140,115 +147,116 @@
     <!-- Application Logic -->
     <script>
         // --- Data ---
+        // Added donors array to every activity as requested.
         const projects = [
             {
-                id: 1, region: "South", donor: "PBF", activity: "Weather Station Equipment - Ubari and Ghat",
+                id: 1, region: "South", donor: "PBF", donors: ["PBF"], activity: "Weather Station Equipment - Ubari and Ghat",
                 percentage: 100, progressDesc: "(Delivered to LNMC. Training Dec 10th in Tripoli. )", comments: "Discussion on installation still ongoing with LNMC",
                 icon: "cloud-rain",
                 link: "https://drive.google.com/drive/folders/1AevU9U_AfhpfpZvNza55fMDvRU_pn879?usp=sharing",
                 value: "USD 93,893.17"
             },
             {
-                id: 2, region: "South", donor: "FW", activity: "Local Governance and Civic Participation Training",
+                id: 2, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Local Governance and Civic Participation Training",
                 percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "",
                 icon: "users",
                 value: "USD 14,214.79",
                 link: "https://drive.google.com/drive/folders/1GDMI0gGudwc3zuDwRdl5xfMQyxm4dsfC?usp=sharing"
             },
             {
-                id: 3, region: "South", donor: "FW", activity: "Report: Governance Diagnostic Towards Transformative Local Action in Murzuq and Sebha",
+                id: 3, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Report: Governance Diagnostic Towards Transformative Local Action in Murzuq and Sebha",
                 percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "Diagnostic Document Available",
                 icon: "clipboard-check",
                 link: "https://undp.sharepoint.com/teams/LBY/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FLBY%2FShared%20Documents%2FPROGRAMME%2FStreghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR%2F5%2E%20Communications%2FContent%20Materials%2FGovernance%20Diagnostic%20Towards%20Transformative%20Local%20Action%2Epdf&parent=%2Fteams%2FLBY%2FShared%20Documents%2FPROGRAMME%2FStreghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR%2F5%2E%20Communications%2FContent%20Materials",
                 value: "USD 21,000"
             },
             {
-                id: 4, region: "South", donor: "FW", activity: "Rehabilitation of GIS office in Sebha municipality",
+                id: 4, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Rehabilitation of GIS office in Sebha municipality",
                 percentage: 100, progressDesc: "Contracted - Site Handed over on 3 November", comments: "",
                 icon: "building",
                 value: "USD 42,800",
                 link: "https://drive.google.com/drive/folders/1eU0gnOQxVMzm6L5rf7AQE5aPTtUefpdg?usp=sharing"
             },
             {
-                id: 5, region: "South", donor: "FW", activity: "Procurement of GIS workstation for Sebha Municipality including Data-Collection Tablets",
+                id: 5, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Procurement of GIS workstation for Sebha Municipality including Data-Collection Tablets",
                 percentage: 99, progressDesc: "Contracted", comments: "(Procurement of a GIS workstation for Sebha Municipality, including data-collection tablets, has been completed. We are currently waiting for confirmation regarding the tablets. The total amount, excluding the tablets, is USD 68,726.00.)",
                 icon: "monitor",
                 value: "USD 83,366",
                 link: "https://drive.google.com/drive/folders/1t2tMLFzve2HOJA3Ounmm3lvX4esh2ZWF?usp=sharing"
             },
             {
-                id: 6, region: "South", donor: "FW", activity: "Training & mentorship program on journalism ethics, and mobile content production in Sebha",
+                id: 6, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Training & mentorship program on journalism ethics, and mobile content production in Sebha",
                 percentage: 100, progressDesc: "Completed 100%", status: "Finalized", comments: "(20+) UNDP Libya Facebook",
                 icon: "mic",
                 link: "https://www.facebook.com/story.php?story_fbid=1260640969441461&id=100064867081184&mibextid=wwXIfr&rdid=nutuCBcD6xDk69J8",
                 value: "USD 3,765"
             },
             {
-                id: 7, region: "South", donor: "FW / Norway", activity: "Peacebuilding & Local Development Plans – Implementation Progress Tracking Application",
+                id: 7, region: "South", donor: "FW / Norway", donors: ["Funding Window", "Norway"], activity: "Peacebuilding & Local Development Plans – Implementation Progress Tracking Application",
                 percentage: 100, progressDesc: "Completion Date: before end of March", status: "Finalized", comments: "",
                 icon: "smartphone",
                 value: "USD 22,000"
             },
             {
-                id: 8, region: "South", donor: "FW", activity: "(Small Grants to Local Women’s Organizations)",
+                id: 8, region: "South", donor: "FW", donors: ["Funding Window"], activity: "(Small Grants to Local Women’s Organizations)",
                 percentage: 70, progressDesc: "Activity kick-off meeting – 15 February 2026.", comments: "(CSO STARTED IMPLEMTATION OF THE ACTIVUTIES)",
                 icon: "heart-handshake",
                 value: "USD 75,000"
             },
             {
-                id: 9, region: "South", donor: "Norway", activity: "Construction of Football Pitch in Bent Baya",
+                id: 9, region: "South", donor: "Norway", donors: ["Norway"], activity: "Construction of Football Pitch in Bent Baya",
                 percentage: 100, progressDesc: "Contracted - Handover site on 10th Nov", status: "Finalized", comments: "(Completion Date: 28 February 2026)",
                 icon: "trophy",
                 value: "USD 73,819",
                 link: "https://drive.google.com/drive/folders/1EGtudcRWjh-Bv7CECnTeHet13csRXDBV?usp=drive_link"
             },
             {
-                id: 10, region: "South", donor: "Norway", activity: "Rehabilitation and upgrade of the municipal community consultation hall in Gurda",
+                id: 10, region: "South", donor: "Norway", donors: ["Norway"], activity: "Rehabilitation and upgrade of the municipal community consultation hall in Gurda",
                 percentage: 100, progressDesc: "Contracted - Handover site 11th Nov", comments: "(The initial handover process is under coordination)",
                 icon: "home",
                 value: "USD 48,581",
                 link: "https://drive.google.com/drive/folders/11ll_TQ60y17iB3YyRUCcmtASyDlbLnf_?usp=sharing"
             },
             {
-                id: 11, region: "South", donor: "Norway", activity: "Provision of Engineering Services for the Rehabilitation of Water Well in Muzque (Sharguiya)",
+                id: 11, region: "South", donor: "Norway", donors: ["Norway"], activity: "Provision of Engineering Services for the Rehabilitation of Water Well in Muzque (Sharguiya)",
                 percentage: 100, progressDesc: "extended to 18 April-2026", status: "Finalized", comments: "",
                 icon: "droplets",
                 value: "USD 55,000",
                 link: "https://drive.google.com/drive/folders/1K_C4pbe4pwAl-7y1DK_EiadwCaXcD0JU?usp=sharing"
             },
             {
-                id: 12, region: "South", donor: "Norway", activity: "Capacity building for Local Peace and Development Committees in M&E and oversight",
+                id: 12, region: "South", donor: "Norway", donors: ["Norway"], activity: "Capacity building for Local Peace and Development Committees in M&E and oversight",
                 percentage: 0, progressDesc: "The consultant has been awarded and is currently conducting mapping stakeholders stage.", comments: "",
                 icon: "book-open"
             },
             {
-                id: 13, region: "South", donor: "AfDB", activity: "TOT training to municipal business incubators by team Libya, DERAYA project (Sebha)",
+                id: 13, region: "South", donor: "AfDB", donors: ["AfDB"], activity: "TOT training to municipal business incubators by team Libya, DERAYA project (Sebha)",
                 percentage: 100, progressDesc: "Finalized", status: "Finalized", comments: "Deraya Activity Link",
                 icon: "graduation-cap",
                 link: "https://www.linkedin.com/posts/deraya_aezaewaffaepaex-aexaezaepaeyaer-team-activity-7391096873102528514-RdiP",
                 value: "USD 15,000"
             },
             {
-                id: 14, region: "South", donor: "AfDB", activity: "MSMEDA Study Tour",
+                id: 14, region: "South", donor: "AfDB", donors: ["AfDB"], activity: "MSMEDA Study Tour",
                 percentage: 0, progressDesc: "Aiming to have the tour in May", comments: "(Tunisia has now been selected as the destination for the tour, and the process is currently in the operational phase for logistics and preparations.)",
                 icon: "plane",
                 link: "https://drive.google.com/drive/folders/1hysMrCd2mzwQo3IuPq_flffi7Ck-wNC_?usp=sharing"
             },
             {
-                id: 15, region: "South", donor: "AfDB", activity: "Small Grants to Start Ups in Sebha",
+                id: 15, region: "South", donor: "AfDB", donors: ["AfDB"], activity: "Small Grants to Start Ups in Sebha",
                 percentage: 99, progressDesc: "Implementation ongoing", comments: "(Completion Date: 31 May 2026)",
                 icon: "rocket",
                 value: "USD 87,582.047"
             },
             {
-                id: 16, region: "South", donor: "FW / Italy", activity: "Supply of Electrical Materials for Murzuq Municipality, Libya – Receiving Entity: GECOL",
+                id: 16, region: "South", donor: "FW / Italy", donors: ["Funding Window", "Italy"], activity: "Supply of Electrical Materials for Murzuq Municipality, Libya – Receiving Entity: GECOL",
                 percentage: 100, progressDesc: "The activity awarded on 14-dec 2025. (final hand over process", status: "Finalized", comments: "This activity covers electrical connection works in Murzuq Municipality, implemented through GECOL. The activity has been recently awarded, aiming to enhance electricity service delivery in the southern region.",
                 icon: "zap",
                 value: "USD 180,911.70",
                 link: "https://drive.google.com/drive/folders/1z3fo-T-1br-MGdKF3itdPUrc03qf811T?usp=sharing"
             },
             {
-                id: 17, region: "South", donor: "FW", activity: "Consultancy on the Design and Implementation of Referral Procedures for the Women Support and Empowerment Affairs Offices (WSEAOs) in Sebha and Murzuq",
+                id: 17, region: "South", donor: "FW", donors: ["Funding Window"], activity: "Consultancy on the Design and Implementation of Referral Procedures for the Women Support and Empowerment Affairs Offices (WSEAOs) in Sebha and Murzuq",
                 percentage: 100, progressDesc: "Approximate completion date: Monday, 11 May 2026. (55 Working Days over a 3-months period)", status: "Finalized", comments: "The contract has been signed with the consultant, and the first deliverable, the inception report, has been submitted.",
                 icon: "hand-heart",
                 value: "USD 3,850"
@@ -499,6 +507,24 @@
 
         // --- Main Logic ---
         let currentFilter = 'all';
+        let currentDonorFilter = 'all';
+
+        function initDonorFilter() {
+            const select = document.getElementById('donor-filter');
+            const uniqueDonors = new Set();
+            projects.forEach(p => {
+                const activityDonors = p.donors || [p.donor];
+                activityDonors.forEach(d => uniqueDonors.add(d.trim()));
+            });
+            
+            // Sort to ensure clean display
+            Array.from(uniqueDonors).sort().forEach(donor => {
+                const option = document.createElement('option');
+                option.value = donor;
+                option.textContent = donor;
+                select.appendChild(option);
+            });
+        }
 
         function renderStats() {
             const total = projects.length;
@@ -595,32 +621,50 @@
             const grid = document.getElementById('projects-grid');
             const title = document.getElementById('projects-title');
             
-            let filtered = projects;
+            const selectedStatus = currentFilter;
+            const selectedDonor = currentDonorFilter;
+
+            let filteredActivities = projects.filter(activity => {
+                // Determine delayed status based on existing rules 
+                const commentsLower = activity.comments?.toLowerCase() || "";
+                const progressLower = activity.progressDesc?.toLowerCase() || "";
+                const isDelayedStatus = activity.actionItem ||
+                       commentsLower.includes('delay') || 
+                       commentsLower.includes('challenge') || 
+                       commentsLower.includes('awaiting') ||
+                       commentsLower.includes('stalled') ||
+                       progressLower.includes('stalled') ||
+                       activity.comments.includes("FOLOW UP") ||
+                       activity.comments.includes("IS WITH IBRAHIM");
+
+                // New combined filtering logic
+                const matchesStatus =
+                    selectedStatus === "all" ||
+                    (selectedStatus === "in-progress" && activity.percentage < 100) ||
+                    (selectedStatus === "completed" && activity.percentage === 100) ||
+                    (selectedStatus === "delayed" && isDelayedStatus);
+
+                const activityDonors = activity.donors || [activity.donor];
+
+                const matchesDonor =
+                    selectedDonor === "all" ||
+                    activityDonors.includes(selectedDonor);
+
+                return matchesStatus && matchesDonor;
+            });
+
+            // Set Title dynamically
             if (currentFilter === 'delayed') {
-                filtered = projects.filter(p => {
-                    const commentsLower = p.comments?.toLowerCase() || "";
-                    const progressLower = p.progressDesc?.toLowerCase() || "";
-                    return p.actionItem ||
-                           commentsLower.includes('delay') || 
-                           commentsLower.includes('challenge') || 
-                           commentsLower.includes('awaiting') ||
-                           commentsLower.includes('stalled') ||
-                           progressLower.includes('stalled') ||
-                           p.comments.includes("FOLOW UP") ||
-                           p.comments.includes("IS WITH IBRAHIM");
-                });
                 title.innerText = 'Activities Cards (Attention Required)';
-            } else if (currentFilter === 'inprogress') {
-                filtered = projects.filter(p => p.percentage < 100);
+            } else if (currentFilter === 'in-progress') {
                 title.innerText = 'Activities Cards (In Progress)';
             } else if (currentFilter === 'completed') {
-                filtered = projects.filter(p => p.percentage === 100);
                 title.innerText = 'Activities Cards (Completed)';
             } else {
                 title.innerText = 'Activities Cards';
             }
 
-            if (filtered.length === 0) {
+            if (filteredActivities.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full py-12 text-center text-slate-500 bg-[#002347]/30 rounded-2xl border border-dashed border-[#003366]">
                         <p>No projects match this filter.</p>
@@ -628,9 +672,15 @@
             } else {
                 let summaryHTML = '';
                 if (currentFilter === 'completed') {
-                    const totalCount = projects.length;
-                    const completedCount = projects.filter(p => p.percentage === 100).length;
-                    const percentage = Math.round((completedCount / totalCount) * 100) || 0;
+                    // Calculate totals based on the currently selected donor
+                    const donorProjects = projects.filter(activity => {
+                        const activityDonors = activity.donors || [activity.donor];
+                        return selectedDonor === 'all' || activityDonors.includes(selectedDonor);
+                    });
+                    
+                    const totalCount = donorProjects.length;
+                    const completedCount = filteredActivities.length;
+                    const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
                     
                     summaryHTML = `
                         <div class="col-span-full mb-2 bg-[#002347]/40 border border-[#006EB5]/20 p-5 rounded-2xl backdrop-blur-md flex flex-col md:flex-row items-center gap-4 shadow-lg transition-all duration-500">
@@ -648,10 +698,15 @@
                     `;
                 }
                 
-                grid.innerHTML = summaryHTML + filtered.map(p => createProjectCard(p)).join('');
+                grid.innerHTML = summaryHTML + filteredActivities.map(p => createProjectCard(p)).join('');
             }
             
             lucide.createIcons();
+        }
+
+        function setDonorFilter(value) {
+            currentDonorFilter = value;
+            renderProjects();
         }
 
         function setFilter(type) {
@@ -674,7 +729,7 @@
             // Set the active button
             if (type === 'all') {
                 btnAll.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
-            } else if (type === 'inprogress') {
+            } else if (type === 'in-progress') {
                 btnInProgress.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
             } else if (type === 'completed') {
                 btnCompleted.className = `px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeClass}`;
@@ -698,6 +753,7 @@
         // --- Init ---
         window.onload = () => {
             updateDate();
+            initDonorFilter();
             renderStats();
             renderCharts();
             renderProjects();
