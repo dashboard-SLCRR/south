@@ -277,9 +277,9 @@
             },
             {
                 id: 20, region: "South", donor: "JSB", donors: ["JSB"], activity: "Supply and Installation of Solar-Powered Water Well System in Al Kufra N'1",
-                percentage: 0, progressDesc: "in the procurement stage", status: "Procurement", comments: "Targeting farmers from both host and displaced communities. (Award by the end of October.)",
+                percentage: 0, progressDesc: "Awarded", status: "Awarded", comments: "Awarded to Zadco Company for Electrical Works, Renewable Energy and Lifts\nStart Date: 01 November 2026\nEnd Date: 31 December 2026\nDuration: 60 days",
                 icon: "sprout",
-                value: "USD 60,000",
+                value: "USD 40,816.00",
                 link: "https://undp.sharepoint.com/:f:/r/teams/LBY/Shared%20Documents/PROGRAMME/Streghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR/RR%206/JSB%202025/Outputs/Output%202.%20Revive%20Local%20Economy/Supply%20and%20Installation%20of%20Solar-Powered%20Water%20Well%20System%20in%20Al%20Kufra/Water%20well%20N%271?d=w2d7dca57f48746c29d6b6c0612a59b43&csf=1&web=1&e=aykgjf"
             },
             {
@@ -291,14 +291,14 @@
             },
             {
                 id: 22, region: "South", donor: "JSB", donors: ["JSB"], activity: "Supply of Packaged Wastewater Treatment Plant WWTP",
-                percentage: 0, progressDesc: "Awarded", status: "Awarded", comments: "Led by Energy and Environment. Contractual delivery deadline of 31 December 2026.",
+                percentage: 15, progressDesc: "Awarded", status: "Awarded", comments: "Led by Energy and Environment. Contractual delivery deadline of 31 December 2026.",
                 icon: "droplet",
                 value: "196,043.00 USD",
                 link: "https://undp.sharepoint.com/:f:/r/teams/LBY/Shared%20Documents/PROGRAMME/Streghtening%20Local%20Capacity%20for%20Recovery%20and%20Resilience%20SLCRR/RR%206/JSB%202025/Outputs/Output%201.%20Rehabilitate%20Infrastructure/Supply%20of%20Packaged%20Wastewater%20Treatment%20Plant%20WWTP?d=wa90350e079fd45fe81953e6cbbcc4c51&csf=1&web=1&e=eEaMT1"
             },
             {
                 id: 23, region: "South", donor: "JSB", donors: ["JSB"], activity: "Supply of Heavy-Duty Hook-Lift Skip Bin (10 m³)",
-                percentage: 0, progressDesc: "in the procurement stage", status: "Procurement", comments: "Led by Energy and Environment and will be Awarded by next week",
+                percentage: 50, progressDesc: "in the procurement stage", status: "Procurement", comments: "- The shipment of eight heavy-duty hook-lift skip bins has arrived at the Ras Ajdir border crossing from Tunisia and is preparing to depart from Tripoli to Kufra.\n- UNDP instructed the supplier to coordinate logistical arrangements and delivery with Mr. Mohamad Sousa from Kufra Service Company (+218 91-7854101).\n- The supplier was reminded to verify all technical compatibility requirements and interface dimensions with the existing fleet before final delivery.",
                 icon: "truck",
                 value: "USD 95,000",
                 valueLabel: "Estimated Value",
@@ -421,19 +421,19 @@
                 footerContent = `
                     <div class="flex items-start gap-2 text-xs text-rose-300 bg-rose-900/10 p-2 rounded border border-rose-500/20">
                         <i data-lucide="alert-circle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
-                        <span class="font-semibold">${project.comments}</span>
+                        <span class="font-semibold whitespace-pre-line">${project.comments}</span>
                     </div>`;
             } else if (isDelayed) {
                 footerContent = `
                     <div class="flex items-start gap-2 text-xs text-amber-300 bg-amber-900/10 p-2 rounded border border-amber-500/20">
                         <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
-                        <span>${project.comments}</span>
+                        <span class="whitespace-pre-line">${project.comments}</span>
                     </div>`;
             } else {
                 footerContent = `
                     <div class="flex items-start gap-2 text-xs text-slate-400">
                         <i data-lucide="message-square" class="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#006EB5]"></i>
-                        <span>${project.comments || "No comments."}</span>
+                        <span class="whitespace-pre-line">${project.comments || "No comments."}</span>
                     </div>`;
             }
             
